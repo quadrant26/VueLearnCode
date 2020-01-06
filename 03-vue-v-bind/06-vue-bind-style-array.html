@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind & v-for</title>
+    <style>
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{message}}</h2>
+    <!-- :style="{key(属性名)：value(属性值)}" -->
+    <!-- '30px' 必须加上单引号 -->
+    <!-- 带上横线的css属性名， 使用驼峰式命名 -->
+    <h2 :style="[baseStyle]">{{message}}</h2>
+    <h2 :style="{fontSize: fontSize + 'px'}">{{message}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!",
+            baseStyle: {backgroundColor: 'red', fontSize: '30px'}
+        }
+    })
+
+</script>
+
+</body>
+</html>

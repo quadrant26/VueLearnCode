@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-on 参数的传递</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{message}}</h2>
+    <div @click="divClick()">
+        aaaaa
+        <!-- .stop 类似于 stopPropagation -->
+        <button @click.stop="bthClick()">按钮1</button>
+    </div>
+    
+    <!-- 2. .prevent 阻止默认事件-->
+    <form action="baidu">
+        <input type="submit" value="提交" @click.prevent="submitClick">
+    </form>
+
+    <!-- 3. 阻止默认行为 -->
+    <form action="baidu" @submit.prevent>
+        <input type="submit" value="提交" >
+    </form>
+
+    <!-- 4. 阻止默认行为 -->
+    <button @click.stop.prevent="submitClick">按钮</button>
+
+    <!-- 5. 键修饰符 键别名-->
+    <input type="text" @keyup.enter="onEnter">
+
+    <!-- 6. 键修饰符 键代号-->
+    <input type="text" @keyup.13="onEnter">
+
+    <!-- 7. 点击只会触发一次-->
+    <input type="button" @click.once="onEnter">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!",
+            counter: 0,
+        },
+        methods: {
+            bthClick(){
+                console.log("btnClick")
+            },
+            divClick(){
+                console.log("divClick")
+            },
+            submitClick (){
+                console.log("submitClick");
+            },
+            onEnter (){
+                console.log( "onEnter");
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>

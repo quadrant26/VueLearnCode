@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-for</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{message}}</h2>
+
+    <!-- 1. 遍历的时候没有使用索引值-->
+    <ul>
+        <li v-for="name in names">{{name}}</li>
+    </ul>
+
+    <!-- 2. 遍历的时候使用索引值-->
+    <ul>
+        <li v-for="(name,index) in names">{{index+1}}.{{name}}</li>
+    </ul>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!",
+            names: ['why', 'boke', 'james', 'curry']
+        }
+    })
+
+</script>
+
+</body>
+</html>

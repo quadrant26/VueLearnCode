@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-for</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{message}}</h2>
+
+    <ul>
+        <li v-for="word in letters" :key="word">{{word}}</li>
+    </ul>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!",
+            letters: ['A', 'B', 'C', 'D', 'E']
+        }
+    })
+
+</script>
+
+</body>
+</html>
