@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind & v-for</title>
+    <style>
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{message}}</h2>
+    <ul>
+        <li v-for="(item, index) in movies" v-on:click="movieClick(index)" :class="currentIndex == index ? currentClass : ''">{{index}} - {{item}}</li>
+    </ul>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!",
+            movies: ["引爆摩天大楼", "第14个目标", "世纪末的魔术师", "瞳孔中的暗杀者", "通往天国的倒计时", "贝克街的亡灵", "迷宫的十字路", "银翼的魔术师", "水平线上的阴谋", "侦探们的镇魂歌", "绀碧之棺", "颤栗的乐谱", "漆黑的追踪者", "天空的遇难船", "沉默的15分钟", "第11个前锋", "绝海的侦探", "异次元的狙击手", "业火的向日葵","纯黑的噩梦", "唐红的恋歌", "零的执行人", "绀青之拳", "绯色的弹丸"],
+            currentIndex: -1,
+            currentClass: "red"
+        },
+        methods: {
+            movieClick (index){
+                this.currentIndex = index;
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>
