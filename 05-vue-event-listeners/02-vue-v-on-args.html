@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-on 参数的传递</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{message}}</h2>
+    <h2>{{counter}}</h2>
+
+    <!-- 事件调用的方法没有参数 -->
+    <button @click="bthClick()">按钮1</button>
+    <button @click="bthClick">按钮1</button>
+
+    <!-- 在事件定义时，写写函数的时候省略了小括号，但是方法是有一个的参数的 这个时候，Vue 会将浏览器生产的 event 事件对象作为参数传入方法-->
+    <button @click="btn2Click()">按钮2</button>
+    <button @click="btn2Click(123)">按钮2</button>
+
+    <button @click="btn3Click('123', $event)">按钮3</button>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!",
+            counter: 0,
+        },
+        methods: {
+            bthClick(){
+                console.log("btnClick...")
+            },
+            btn2Click(abc){
+                console.log("btn2Click " + abc);
+            },
+            btn3Click(event){
+                console.log("btn3Click " + event);
+            },
+            btn3Click(abc, event){
+                console.log("+++++++ " + abc + "" + event);
+            }
+        }
+    })
+
+    // 如果函数需要参数，但是没有传入，那恩么函数的形参为 undefined
+    function abc(name){
+        console.log(name);
+    }
+
+</script>
+
+</body>
+</html>
