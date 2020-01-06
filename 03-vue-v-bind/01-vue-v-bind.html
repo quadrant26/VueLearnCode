@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind</title>
+    <style>
+        img{
+            width: 100px;}
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{message}}</h2>
+    <!-- 错误的写法  -->
+    <img src="{{imgUrl}}" alt="">
+    <!-- v-bind -->
+    <img v-bind:src="imgUrl" alt="">
+    <img :src="imgUrl" alt="">
+    <a v-bind:href="hrefUrl">百度一下</a>
+    <!-- 简写 -->
+    <img :src="imgUrl" alt="">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!",
+            imgUrl: "https://fanyi-cdn.cdn.bcebos.com/static/translation/img/header/logo_40c4f13.svg",
+            hrefUrl: "http://www.baidu.com/"
+        }
+    })
+
+</script>
+
+</body>
+</html>
