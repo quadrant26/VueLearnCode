@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V-if</title>
+</head>
+<body>
+
+<div id="app">
+    <!-- v-if v-else v-else-if 必须是统计标签 -->
+    <h1 v-if="source>=90">优秀</h1>
+    <h1 v-else-if="source>=80">良好</h1>
+    <h1 v-else-if="source>=60">及格</h1>
+    <h1 v-else>垃圾</h1>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!",
+            isShow: true,
+            source: 40
+        }
+    })
+
+</script>
+
+</body>
+</html>
