@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Components</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{message}}</h2>
+
+    <!-- 组件实例 -->
+    <ces></ces>
+    <ces></ces>
+    <ces></ces>
+</div>
+
+<template id="tepl">
+    <div>
+        <h2>当前计数：{{counter}}</h2>
+        <button @click="decrement">-</button>
+        <button @click="increment">+</button>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    Vue.component('ces', {
+        template: "#tepl",
+        data (){
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            decrement (){
+                this.counter --;
+            },
+            increment (){
+                this.counter ++;
+            }
+        }
+    })
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!"
+        }
+    })
+
+</script>
+
+</body>
+</html>
