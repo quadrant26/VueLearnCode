@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Components 父组件和子组件</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{message}}</h2>
+
+    <!-- 3. 使用组件 -->
+    <cpn1></cpn1>
+    <cpn2></cpn2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 全局组件注册的语法糖
+    Vue.component('cpn1', {
+        template: `
+            <div>
+                <h2>我是标题</h2>
+                <p>我是父组件</p>
+            </div>
+            `,
+    })
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!"
+        },
+        components:{
+            'cpn2': {
+                template: `
+            <div>
+                <h2>我是标题</h2>
+                <p>我是子组件组件</p>
+            </div>
+                `
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>
