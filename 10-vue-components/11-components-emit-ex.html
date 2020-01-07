@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Components-props</title>
+</head>
+<body>
+
+<!-- 2. 父组件模版 -->
+<div id="app">
+    <cpn @reducebtn="totalCounter" @addbtn="totalCounter"></cpn>
+    <h4>点击次数： {{total}}</h4>
+</div>
+
+<!-- 1. 子组件模板 -->
+<template id="cpn">
+    <div>
+       <button @click="decrement">-</button>
+       <button @click="increment">+</button>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    // 1. 子组件
+    const cpn = {
+        template: "#cpn",
+        methods: {
+            decrement (){
+                this.$emit('reducebtn')
+            },
+            increment (){
+                this.$emit('addbtn')
+            }
+        }
+    }
+
+    // 2. 父组件模版
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!",
+            total: 0,
+        },
+        methods: {
+            totalCounter(){
+                this.total ++;
+            }
+        },
+        components: {
+            cpn
+        }
+    })
+
+</script>
+
+</body>
+</html>
