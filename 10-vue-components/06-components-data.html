@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Components 父组件和子组件</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{message}}</h2>
+
+    <!-- 3. 使用组件 -->
+    <cpn1></cpn1>
+    <cpn2></cpn2>
+</div>
+
+<!-- 1. 模版的写法 -->
+<script type="text/x-template" id="parent">
+    <div>
+        <h2>{{title}}</h2>
+        <p>我是内容，哈哈</p>
+    </div>
+</script>
+
+<!-- 2. template -->
+<template id="child">
+    <div>
+        <h2>我是标题2</h2>
+        <p>我是内容，哈哈2</p>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 1. 注册一个全局组件
+    Vue.component('cpn1', {
+        template: "#parent",
+        data (){
+            return {
+                title: 'abc'
+            }
+        }
+    })
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            title: 'abc2424',
+            message: "Hello, World!"
+        },
+        components:{
+            'cpn2': {
+                template: "#child"
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>
