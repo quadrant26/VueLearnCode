@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-model 修饰符</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{message}}</h2>
+
+    <!-- 1. 修饰符： lazy -->
+    <!-- lazy 懒加载 在双向绑定的二时候， input 在失焦或敲击回车键的时候，才会进行数据更新-->
+    <input type="text" v-model.lazy="message">
+    <br />
+
+    <!-- 2. 修饰符：number -->
+    <!-- 输入框默认的都是 string, 将输入框的内容专为 number 类型 -->
+    <input type="number" v-model.number="age">
+    <h2>{{typeof age}}</h2>
+    <br />
+
+    <!-- 3. 修饰符： trim -->
+    <!-- 去除输入框中的空格 -->
+    <input type="number" v-model.trim="name">
+    <h2>你的名字：{{name}}</h2>
+    <br />
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!",
+            age: '',
+            name: ""
+        }
+    })
+
+</script>
+
+</body>
+</html>
