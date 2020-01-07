@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Components-props</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{message}}</h2>
+
+    <cpn :c-info="info" :child-my-message="message"></cpn>
+</div>
+
+<template id="cpn">
+    <div>
+        <h2>{{cInfo}}</h2>
+        <p>{{childMyMessage}}</p>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const cpn = {
+        template: "#cpn",
+        props: {
+            cInfo: {
+                type: Object,
+                default(){
+                    return {}
+                }
+            },
+            childMyMessage: {
+                type: String,
+                default: ""
+            }
+        }
+    }
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!",
+            info: {
+                name: 'why',
+                age: 18,
+                height: 1.68
+            }
+        },
+        components: {
+            cpn
+        }
+    })
+
+</script>
+
+</body>
+</html>
