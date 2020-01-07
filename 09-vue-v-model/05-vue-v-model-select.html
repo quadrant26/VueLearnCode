@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-model</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{message}}</h2>
+
+    <select name="abc" id="" v-model="fruit">
+        <option value="苹果">苹果</option>
+        <option value="香蕉">香蕉</option>
+        <option value="榴莲">榴莲</option>
+        <option value="脐橙">脐橙</option>
+        <option value="葡萄">葡萄</option>
+    </select>
+
+    <select name="abcd" multiple id="" v-model="fruits">
+        <option value="苹果">苹果</option>
+        <option value="香蕉">香蕉</option>
+        <option value="榴莲">榴莲</option>
+        <option value="脐橙">脐橙</option>
+        <option value="葡萄">葡萄</option>
+    </select>
+
+    <h2>您的爱好是：{{fruit}}</h2>
+    <h2>您的爱好是：{{fruits}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!",
+            fruit: "香蕉",
+            fruits: []
+        }
+    })
+
+</script>
+
+</body>
+</html>
