@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Components-props</title>
+</head>
+<body>
+
+<!-- 2. 父组件模版 -->
+<div id="app">
+    <cpn v-on:itemclick="clickCategory"></cpn>
+</div>
+
+<!-- 1. 子组件模板 -->
+<template id="cpn">
+    <div>
+        <button v-for="(item, index) in categories" @click="btnClick(item)">{{item.name}}</button>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    // 1. 子组件
+    const cpn = {
+        template: "#cpn",
+        data(){
+            return {
+                categories: [
+                    {id: 1, name: "热门推荐"},
+                    {id: 2, name: "手机数码"},
+                    {id: 3, name: "家用电器"},
+                    {id: 4, name: "电脑办公"},
+                ]
+            }
+        },
+        methods: {
+            btnClick (item){
+                // console.log(item);
+                this.$emit('itemclick', item);
+            }
+        }
+    }
+
+    // 2. 父组件模版
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!",
+        },
+        methods: {
+            clickCategory (item){
+                console.log(item);
+            }
+        },
+        components: {
+            cpn
+        }
+    })
+
+</script>
+
+</body>
+</html>
