@@ -32,9 +32,34 @@ const app = new Vue({
             }
         ]
     },
+    computed:{
+        totalAllPrice (){
+            let totalPrice = 0;
+            for(let i = 0; i < this.list.length; i++){
+                totalPrice += this.list[i].count * this.list[i].price;
+            }
+            return totalPrice;
+
+            // for (let i in/of this.list)
+            // reduce
+        }
+    },
     methods: {
         getFinalPrice (price){
             return '￥' + price.toFixed(2);
+        },
+        decrement (index){
+            if ( this.list[index].count <= 1 )return;
+            this.list[index].count --;
+            console.log("decrement")
+        },
+        increment (index){
+
+            this.list[index].count ++;
+            console.log("increment")
+        },
+        removeHandle (index){
+            this.list.splice(index, 1);
         }
     },
     filters: {
