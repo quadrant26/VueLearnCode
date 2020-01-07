@@ -31,5 +31,15 @@ const app = new Vue({
                 count: 1
             }
         ]
+    },
+    methods: {
+        getFinalPrice (price){
+            return '￥' + price.toFixed(2);
+        }
+    },
+    filters: {
+        showPrice(price){
+            return '￥' + price.toFixed(2);
+        }
     }
 })

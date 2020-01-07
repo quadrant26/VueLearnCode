@@ -24,7 +24,7 @@
                 <td>{{index+1}}</td>
                 <td>{{item.name}}</td>
                 <td>{{item.date}}</td>
-                <td>{{item.price}}</td>
+                <td>{{item.price | showPrice}}</td>
                 <td>
                     <button>-</button>
                     {{item.count}}
@@ -34,6 +34,7 @@
             </tr>
         </tbody>
     </table>
+    <h2>总价格：{{}}</h2>
 </div>
 
 <script src="../js/vue.js"></script>
