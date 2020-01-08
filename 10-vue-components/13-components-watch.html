@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue components 组件通信</title>
+    <style>
+        body{
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{message}}</h2>
+
+    <cpn :number1="num1" :number2="num2" @num1change="num1change" @num2change="num2change"></cpn>
+</div>
+
+<template id="cpn">
+    <div>
+        <h2>Props: {{number1}}</h2>
+        <h2>Data: {{dnumber1}}</h2>
+        <input type="text" v-model="dnumber1">
+        <h2>Props: {{number2}}</h2>
+        <h2>Data: {{dnumber2}}</h2>
+        <input type="text" v-model="dnumber2">
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!",
+            num1: 1,
+            num2: 0
+        },
+        methods: {
+            // 默认传递的是 string 类型
+            // 控制会出现错误
+            num1change (num1){
+                this.num1 = parseFloat(num1);
+            },
+            num2change (num2){
+                this.num2 = num2 * 1;
+            }
+        },
+        components: {
+            cpn: {
+                template: "#cpn",
+                props: {
+                    number1: Number,
+                    number2: Number,
+                },
+                data (){
+                    return {
+                        dnumber1: this.number1,
+                        dnumber2: this.number2,
+                    }
+                },
+                watch: {
+                    dnumber1(newValue){
+                        this.dnumber2 = newValue * 100;
+                        this.$emit("num1change", newValue);
+                    },
+                    dnumber2(newValue){
+                        this.dnumber1 = newValue / 100;
+                        this.$emit("num2change", newValue);
+                    }
+                }
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>
