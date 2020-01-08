@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue slot</title>
+    <style>
+        body{
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+<!--
+1. slot 基本使用 <slot></slot>
+2. slot 默认值 <slot><button>按钮</button></slot>
+3. 如果有多个值，同时放入到组件进行替换时，一起作为替换元素去替换
+-->
+<div id="app">
+
+    <cpn>
+        <span>标题</span>
+    </cpn>
+
+    <cpn>
+        <span slot="center">标题</span>
+    </cpn>
+
+    <cpn>
+        <span slot="left">返回</span>
+    </cpn>
+
+</div>
+
+<template id="cpn">
+    <div>
+        <slot name="left"><span>左边</span></slot>
+        <slot name="center"><span>中间</span></slot>
+        <slot name="right"><span>右边</span></slot>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const cpn = {
+        template: "#cpn"
+    }
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello, World!"
+        },
+        components: {
+            cpn
+        }
+    })
+
+</script>
+
+</body>
+</html>
