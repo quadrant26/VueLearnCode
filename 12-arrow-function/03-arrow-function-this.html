@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数</title>
+</head>
+<body>
+<script>
+    // 什么时候使用
+    setTimeout(function (){
+        console.log(this);  // window
+    }, 1000)
+
+    setTimeout( () => {
+        console.log(this);  // window
+    }, 1000)
+
+    // 结论： 箭头函数中的 this 引用的就是最近作用域中的 this
+    // 问题： 箭头函数中的 this 是如何查找的
+    // 答案：向外层作用域中，一层层查找 this， 知道有 this 的定义
+
+    const obj = {
+        aaa() {
+
+            setTimeout(function () {
+                console.log(this);  // Object
+            }, 1000)
+
+            setTimeout(() => {
+                console.log(this);  // obj对象
+            }, 1000)
+        }
+    }
+
+    obj.aaa();
+
+</script>
+</body>
+</html>
