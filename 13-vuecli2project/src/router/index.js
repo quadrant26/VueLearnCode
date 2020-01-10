@@ -86,6 +86,9 @@ const routes = [
     component: Profile,
     meta: {
       title: "档案"
+    },
+    beforeEnter: (to, from, next) => {
+      console.log( to )
     }
   }
 ]
@@ -98,11 +101,19 @@ const router = new Router({
 
 
 // 前置钩子(hook)
+// 前置守卫(guard)
 router.beforeEach((to, from, next) => {
   // 从 from 到 to
   document.title = to.matched[0].meta.title;
-  console.log(to)
+  // console.log(to)
+  console.log("++++++")
   next()
+})
+
+// 后置钩子
+router.afterEach( (to, from) =>{
+  console.log("-----")
+  console.log(to)
 })
 
 export default router
