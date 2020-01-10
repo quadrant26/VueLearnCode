@@ -33,6 +33,7 @@ const About = () => import("@/components/About");
 const User = () => import("@/components/User");
 const News = () => import("@/components/News");
 const Message = () => import("@/components/Message");
+const Profile = () => import("@/components/Profile")
 
 const routes = [
   {
@@ -64,6 +65,10 @@ const routes = [
   {
     path: '/user/:userId',
     component: User
+  },
+  {
+    path: '/profile',
+    component: Profile
   }
 ]
 
