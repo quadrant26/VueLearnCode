@@ -45,7 +45,7 @@ const routes = [
     children: [
       {
         path: '',
-        redireact: 'news'
+        redirect: 'news'
       },
       {
         path: 'news',
