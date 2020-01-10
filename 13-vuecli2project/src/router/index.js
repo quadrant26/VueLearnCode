@@ -31,6 +31,8 @@ const routes = [
 const Home = () => import("@/components/Home");
 const About = () => import("@/components/About");
 const User = () => import("@/components/User");
+const News = () => import("@/components/News");
+const Message = () => import("@/components/Message");
 
 const routes = [
   {
@@ -39,7 +41,21 @@ const routes = [
   },
   {
     path: '/home',
-    component: Home
+    component: Home,
+    children: [
+      {
+        path: '',
+        redireact: 'news'
+      },
+      {
+        path: 'news',
+        component: News
+      },
+      {
+        path: 'message',
+        component: Message
+      }
+    ]
   },
   {
     path: '/about',
