@@ -24,7 +24,19 @@ const store = new Vuex.Store({
       state.counter --;
     },
     incrementCount(state, number){
-      state.counter += number;
+      // payload 负载
+      // 1. 普通的提交风格
+      // state.counter += number;
+
+      // 2. 特殊的提交封装
+      console.log(number)
+
+    },
+    incrementCount2(state, payload){
+      // payload 负载
+      // 2. 特殊的提交封装
+      state.counter += payload.number;
+
     },
     addStudent(state, stu){
       state.students.push(stu);

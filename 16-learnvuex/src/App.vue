@@ -9,6 +9,7 @@
 
     <button @click="addcount(10)">+10</button>
     <button @click="addcount(5)">+5</button>
+    <button @click="addcount2(5)">+5 提交风格</button>
     <button @click="addStudent">添加学生</button>
 
 
@@ -56,7 +57,16 @@ export default {
       this.$store.commit('increment')
     },
     addcount (number){
+      // payload 负载
+      // 1. 普通的提交风格
       this.$store.commit('incrementCount', number)
+    },
+    addcount2 (number){
+      // 2. 特殊的提交封装
+      this.$store.commit({
+        type: 'incrementCount2',
+        number
+      })
     },
     addStudent (){
       const stu = {id: 114, name: 'amy', age: 35};
