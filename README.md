@@ -296,6 +296,29 @@
         *include 字符串或正则，只有匹配的组件才会被缓存*
         
         *exclude 排除组件(不写入缓存), 多个组件用逗号隔开，不要加空格*
+
+    - ### 设置别名
+
+        **在 webpack 中设置**
+
+        ***设置别名后，在 html
+         中 src 使用时 加载图片时 需要在 设置别名的路劲前加 ~ 符号***
+
+        `<img slot="item-icon" src="~assets/img/tabbar/home.svg" alt="">`
+
+        ```
+        module.exports = {
+            resolve: {
+                extensions: ['.js', '.vue', '.json'],
+                alias: {
+                '@': resolve('src'),
+                'assets': resolve('src/assets'),
+                'components': resolve('src/components'),
+                'views': resolve('src/views'),
+                }
+            }
+        }
+        ```
         
            
            
@@ -310,5 +333,94 @@
         activated  ->   活跃状态
         deactivated ->  不活跃状态
         使用 keep-alive 保持状态的才调用
+
+5. Promise
+
+    - ### 异步编程解决方案
+    
+    ```
+        // 什么情况不会用到 Promise
+        // 有异步操作操作时，使用 promise 对这个异步操作进行封装
+        // new -> 构造函数(11. 保存了一些状态信息，2. 执行传入的函数)
+        // 在执行中传入的回调函数时，会传入两个参数，resolve,reject 本身也是函数
+        new Promise( (resolve, reject) => {
+            setTimeout( () => {
+                // 成功的时候调用 resolve
+                resolve('Hello, Promise');
+    
+                // 失败的时候调用 reject
+                // reject('error message')
+            }, 1000)
+        }).then((data) => {
+            console.log(data)
+            console.log(data)
+            console.log(data)
+            console.log(data)
+        }).catch( (err) => {
+            console.log(err);
+        })
+    ```
+     
+    sync -> 同步
+    
+    async -> 异步
+    
+    - ### Promise 状态
         
+        pending: 等待状态， 正在进行网络请求，或者定时器没有到时间
+        
+        fulfill: 满足状态。
+        
+        reject: 拒绝状态 
+        
+    - ### Promise 简写
+    
+        **不用 new Promise 直接用Promise.resolve 或 Promise.reject**
+        
+        `Promise.resolve(data)`
+        `Promise.reject(data)`
+        
+    - ### Promise 抛出异常
+    
+        ```
+            new Promise( (resolve, reject) => {
+                setTimeout( () => {
+                    resolve('aaa')
+                }, 1000)
+            }).then( res => {
+                // 1. 自己处理
+                console.log(res, '第一层的10处理代码')
+        
+                // 2.
+                // return Promise.resolve(res + '111')
+                return Promise.reject('error message');
+                throw 'error message';
+            }).catch( err => {
+                console.log(err);
+            })
+        ```
+    - ### Promise.all
+        
+        ```
+            Promise.all([
+                new Promise( (resolve, reject) => {
+                    setTimeout( () => {
+                        resolve('result1')
+                    }, 2000)
+                }),
+                new Promise( (resolve, reject) => {
+                    setTimeout( () => {
+                        resolve('result2')
+                    }, 2000)
+                }),
+            ]).then( res => {
+                // res[0]
+                // res[1]
+                console.log(res);
+            })
+        ```
+6. Vuex
+
+
+7. axios 
                  
