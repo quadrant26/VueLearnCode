@@ -8,3 +8,5 @@ new Vue({
   el: '#app',
   render: h => h(App)
 })
+
+// require('./assets/css/base.css')
