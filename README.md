@@ -20,18 +20,18 @@
 
 3. vue-router
 
-    + 导入 router
+    - ### 导入 router
 
         ```
         import Vue from 'vue'
         import VueRouter from 'vue-router'
         ```
     
-    - 使用 router
+    - ### 使用 router
     
         `Vue.use(VueRouter)`
     
-    - 创建 router 对象
+    - ### 创建 router 对象
         
         ```
         const routes = [
@@ -45,11 +45,11 @@
         })
         ```
     
-    - 导出( 将 router 传入到 Vue 实例中 )
+    - ### 导出( 将 router 传入到 Vue 实例中 )
 
         `export default router;`
 
-    - 使用
+    - ### 使用
 
         ```
         <router-link to="/home"></router-link>
@@ -59,7 +59,7 @@
         <router-view></router-view> 
         ```
 
-    - 重定向
+    - ### 重定向
 
         ```
         {
@@ -68,7 +68,7 @@
         }
         ```
 
-    - url 显示方式 hash -> history
+    - ### url 显示方式 hash -> history
 
         ```
         const router = new Router({
@@ -76,7 +76,7 @@
             mode: 'history'
         })
         ```
-    - router-link 渲染
+    - ### router-link 渲染
         
         渲染成 button 按钮
         
@@ -85,7 +85,7 @@
         history 不生效 添加 replace 属性
         `<router-link to="/home" tag="button" replace></router-link>`
         
-    - 指定 active-class
+    - ### 指定 active-class
             
         *第一种方法*
             
@@ -105,7 +105,7 @@
         })
         ```
         
-    - 通过 代码跳转路由
+    - ### 通过 代码跳转路由
         
         `this.$router.push('/home')`
         `this.$router.replace('/home')`
@@ -127,7 +127,7 @@
         }
         ```
         
-    - 动态路由
+    - ### 动态路由
         
         ```
         {
@@ -143,7 +143,7 @@
         this.$route.params
         ```
         
-    - 路由的懒加载
+    - ### 路由的懒加载
         
         *方式一： 结合Vue的一部组件和Webpack*
         
@@ -157,7 +157,7 @@
         
         `const Home = () => import('@/components/Home.vaue')`
         
-    - 嵌套理由
+    - ### 嵌套路由
         
         */home/news and /home/message*
         
@@ -190,7 +190,7 @@
         <router-link to="/home/message">消息</router-link>
         <router-view></router-view>
         ```
-    - 参数传递
+    - ### 参数传递
         
         **方式一：query**
             
@@ -243,7 +243,7 @@
         this.$router.push('/user/' + this.userId).catch(err => {err});
         ```
         
-    - 导航守卫
+    - ### 导航守卫
     
         
         ```
@@ -286,4 +286,29 @@
         }
         ```
         
-                    
+
+    + ### keep-alive
+        
+        **kepp-alive 是内置组件，可以使包含的组件保留状态，或避免重新渲染**
+        
+        **router-view 也是一个组件，如果抱在 keep-alive 里面，所有路径匹配到的视图组件都会被缓存**
+        
+        *include 字符串或正则，只有匹配的组件才会被缓存*
+        
+        *exclude 排除组件(不写入缓存), 多个组件用逗号隔开，不要加空格*
+        
+           
+           
+4. 生命周期函数
+    
+    - ### destroyed 组件销毁的时候
+    
+        使用 keep-alive 不调用此生命周期函数
+        
+    - ### activated deactivated 
+        
+        activated  ->   活跃状态
+        deactivated ->  不活跃状态
+        使用 keep-alive 保持状态的才调用
+        
+                 
