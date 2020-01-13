@@ -7,6 +7,10 @@
     <button @click="subtraction">-</button>
     <button @click="addition">+</button>
 
+    <button @click="addcount(10)">+10</button>
+    <button @click="addcount(5)">+5</button>
+    <button @click="addStudent">添加学生</button>
+
 
     <p>{{more20stus}}</p>
 
@@ -50,6 +54,13 @@ export default {
     },
     addition (){
       this.$store.commit('increment')
+    },
+    addcount (number){
+      this.$store.commit('incrementCount', number)
+    },
+    addStudent (){
+      const stu = {id: 114, name: 'amy', age: 35};
+      this.$store.commit('addStudent', stu);
     }
   }
 }
