@@ -46,11 +46,14 @@ const routes = [
   {
     path: '/home',
     component: Home,
+    meta: {
+      title: "首页"
+    },
     children: [
-      {
-        path: '',
-        redirect: 'news'
-      },
+      // {
+      //   path: '',
+      //   redirect: 'news'
+      // },
       {
         path: 'news',
         component: News,
@@ -106,14 +109,14 @@ router.beforeEach((to, from, next) => {
   // 从 from 到 to
   document.title = to.matched[0].meta.title;
   // console.log(to)
-  console.log("++++++")
+  // console.log("++++++")
   next()
 })
 
 // 后置钩子
 router.afterEach( (to, from) =>{
-  console.log("-----")
-  console.log(to)
+  // console.log("-----")
+  // console.log(to)
 })
 
 export default router

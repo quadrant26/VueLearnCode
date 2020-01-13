@@ -16,6 +16,11 @@
     <button @click="profileClick">档案</button>
 
     <router-view></router-view>
+
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+
   </div>
 </template>
 
