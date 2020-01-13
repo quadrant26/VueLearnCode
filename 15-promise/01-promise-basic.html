@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise</title>
+</head>
+<body>
+
+
+<script>
+    // 1. 使用 setTimeout
+    // setTimeout( ()=>{
+    //     console.log('Hello, World');
+    // }, 1000)
+
+
+    // new Promise( (resolve, reject) => {
+    //     setTimeout( ()=>{
+    //         console.log('Hello, World');
+    //         console.log('Hello, World');
+    //         console.log('Hello, World');
+    //         console.log('Hello, World');
+    //
+    //         setTimeout( () => {
+    //             console.log('Hello, Vue.js');
+    //             console.log('Hello, Vue.js');
+    //             console.log('Hello, Vue.js');
+    //             console.log('Hello, Vue.js');
+    //
+    //             setTimeout( () => {
+    //                 console.log('Hello, Python');
+    //                 console.log('Hello, Python');
+    //                 console.log('Hello, Python');
+    //             })
+    //         }, 1000)
+    //     }, 1000)
+    // })
+
+    // 2. Promise -> 函数(resolve, reject)
+    // resolve, reject 本身又是函数
+    // 链式编程
+    // new Promise( (resolve, reject) => {
+    //     // 第一次网络请求的代码
+    //     setTimeout( () => {
+    //         resolve();
+    //     }, 1000)
+    // }).then( () => {
+    //     // 第一次处理的代码
+    //     console.log('Hello, World');
+    //     console.log('Hello, World');
+    //     console.log('Hello, World');
+    //     console.log('Hello, World');
+    //
+    //     // 第二次网络请求的代码
+    //     return new Promise( (resolve, reject) => {
+    //         setTimeout( () => {
+    //             resolve();
+    //         }, 1000)
+    //     })
+    // }).then( () => {
+    //     // 第二次处理的代码
+    //     console.log('Hello, Vue.js');
+    //     console.log('Hello, Vue.js');
+    //     console.log('Hello, Vue.js');
+    //     console.log('Hello, Vue.js');
+    //
+    //     // 第三次处理的代码
+    //     return new Promise( (resolve, reject) => {
+    //         setTimeout( () => {
+    //             resolve();
+    //         }, 1000)
+    //     })
+    // }).then( () => {
+    //     // 第三次处理的代码
+    //     console.log('Hello, Python');
+    //     console.log('Hello, Python');
+    //     console.log('Hello, Python');
+    //     console.log('Hello, Python');
+    // })
+
+    // 什么情况不会用到 Promise
+    // 有异步操作操作时，使用 promise 对这个异步操作进行封装
+    // new -> 构造函数(11. 保存了一些状态信息，2. 执行传入的函数)
+    // 在执行中传入的回调函数时，会传入两个参数，resolve,reject 本身也是函数
+    new Promise( (resolve, reject) => {
+        setTimeout( () => {
+            // 成功的时候调用 resolve
+            resolve('Hello, Promise');
+
+            // 失败的时候调用 reject
+            // reject('error message')
+        }, 1000)
+    }).then((data) => {
+        console.log(data)
+        console.log(data)
+        console.log(data)
+        console.log(data)
+    }).catch( (err) => {
+        console.log(err);
+    })
+</script>
+</body>
+</html>
