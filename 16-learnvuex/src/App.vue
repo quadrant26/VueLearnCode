@@ -1,14 +1,17 @@
 <template>
   <div id="app">
     <h2>{{message}}</h2>
-    <p>{{counter}}</p>
+    <p>{{$store.state.counter}}</p>
 
-    <button @click="decrement">-</button>
-    <button @click="increment">+</button>
+    <button @click="$store.state.counter--">-</button>
+    <button @click="$store.state.counter++">+</button>
+
+    <hello-vuex :counter="counter"></hello-vuex>
   </div>
 </template>
 
 <script>
+import HelloVuex from '@/components/HelloVuex'
 
 export default {
   name: 'App',
@@ -17,6 +20,9 @@ export default {
       message: "我是App组件",
       counter: 0,
     }
+  },
+  components: {
+    HelloVuex
   },
   methods: {
     decrement (){

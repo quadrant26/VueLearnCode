@@ -6,7 +6,9 @@ Vue.use(Vuex)
 
 // 2. 创建对象
 const store = new Vuex.Store({
-  state: {},
+  state: {
+    counter: 10,
+  },
   mutations: {},
   actions: {},
   getters: {},
