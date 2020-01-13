@@ -17,7 +17,7 @@
 
     <router-view></router-view>
 
-    <keep-alive>
+    <keep-alive exclude="Profile,User">
       <router-view></router-view>
     </keep-alive>
 
