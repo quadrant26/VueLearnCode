@@ -9,7 +9,7 @@
 
 <script>
 
-import MainTabBarItem from './components/mainTabbar/MainTabBar'
+import MainTabBarItem from 'components/mainTabbar/MainTabBar'
 
 export default {
   name: 'App',
