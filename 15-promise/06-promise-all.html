@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise 链式调用</title>
+</head>
+<body>
+
+<script>
+
+    // 同时两个请求
+    var isResult1 = false;
+    var isResult2 = false;
+
+    $ajax({
+        url: '',
+        success: function (data){
+            console.log('结果1');
+            isResult1 = true;
+            handleResult();
+        }
+    })
+    $ajax({
+        url: '',
+        success: function (data){
+            console.log('结果2');
+            isResult2 = true;
+            handleResult();
+        }
+    })
+
+    function handleResult (){
+        if ( isResult1 && isResult2){
+
+        }
+    }
+
+    // Promise.all([
+    //     new Promise( (resolve, reject) => {
+    //         $.ajax({
+    //             url: 'url',
+    //             success: function (data){
+    //                 resolve(data)
+    //             }
+    //         })
+    //     }),
+    //     new Promise( (resolve, reject) => {
+    //         $.ajax({
+    //             url: 'ur2',
+    //             success: function (data){
+    //                 resolve(data)
+    //             }
+    //         })
+    //     }),
+    // ]).then( res => {
+    //     // res[0]
+    //     // res[1]
+    //     console.log(res);
+    // })
+
+    Promise.all([
+        new Promise( (resolve, reject) => {
+            setTimeout( () => {
+                resolve('result1')
+            }, 2000)
+        }),
+        new Promise( (resolve, reject) => {
+            setTimeout( () => {
+                resolve('result2')
+            }, 2000)
+        }),
+    ]).then( res => {
+        // res[0]
+        // res[1]
+        console.log(res);
+    })
+
+</script>
+
+</body>
+</html>
