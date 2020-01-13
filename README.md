@@ -419,8 +419,147 @@
                 console.log(res);
             })
         ```
+        
 6. Vuex
-
+    
+    - ### 状态管理器
+    
+        集中式存储管理
+    
+    - ### 使用
+        
+        安装
+        
+            `npm install --save vuex@3.0.1`
+        
+        使用
+        
+        ```
+            // store/index.js
+            import Vue from 'vue'
+            import Vuex from 'vuex'
+            
+            // 1. 装载插件
+            Vue.use(Vuex)
+            
+            // 2. 创建对象
+            const store = new Vuex.Store({
+              state: {
+                counter: 10,
+              },
+              mutations: {},
+              actions: {},
+              getters: {},
+              modules: {}
+            });
+            
+            
+            // 3. 导出
+            export default store;
+            
+            // 使用
+            import store from './store'
+            
+            new Vue({
+              el: '#app',
+              store,
+              render: h => h(App)
+            })
+        ```
+    
+    - ### State
+        
+        **访问 state 内的数据**
+        
+        `$store.state.xx`
+    
+    - ### Getters
+        
+        类似于 计算属性
+        
+        ```vue
+            getters: {
+              powerCount(state) {
+                return state.counter * state.counter;
+              },
+              more20stu (state){
+                return state.students.filter( s => s.age >= 20 )
+              },
+              more20stuLength(state, getters){
+                // return state.students.filter( s => s.age >= 20 )
+                return getters.more20stu.length;
+              },
+              moreAgestu (state){
+                // 返回一个函数（getters 方法传递了参数）
+                // 第一种写法
+                return function (age){
+                  return state.students.filter( s => s.age >= age )
+                }
+                // 第二种写法
+                return age => { return state.students.filter( s => s.age >= age )}
+              }
+            },
+        ```
+        getters 访问
+        
+        `{{$store.getters.more20stuLength}}`
+    
+    - ### Mutations
+        
+        - 包括两个部分
+            
+            - 事件类型 type
+            
+            - 回调函数 handle, 该回调函数的第一个参数就是 state
+            
+        ```
+            mutations: {
+                // 方法
+                increment(state){
+                  state.counter ++;
+                },
+                decrement (state){
+                  state.counter --;
+                }
+            },
+        ```
+            - 参数传递
+                    
+        `this.$store.commit('incrementCount', number)`
+        
+        ```vue
+           mutations: {
+              incrementCount(state, number){
+                 state.counter += number;
+              },
+           }
+        ```
+        
+            - 第二种提交风格
+            
+        ```
+            // 提交
+            addcount2 (number){
+              // 2. 特殊的提交封装
+              this.$store.commit({
+                type: 'incrementCount2',
+                number
+              })
+            },
+            
+            // 使用
+            incrementCount2(state, payload){
+              // payload 负载
+              // 2. 特殊的提交封装
+              state.counter += payload.number;
+        
+            },
+        ```
+                    
+    
+    - ### Action
+    
+    - ### Module
 
 7. axios 
                  
