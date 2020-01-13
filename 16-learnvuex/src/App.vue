@@ -3,8 +3,8 @@
     <h2>{{message}}</h2>
     <p>{{$store.state.counter}}</p>
 
-    <button @click="$store.state.counter--">-</button>
-    <button @click="$store.state.counter++">+</button>
+    <button @click="subtraction">-</button>
+    <button @click="addition">+</button>
 
     <hello-vuex :counter="counter"></hello-vuex>
   </div>
@@ -25,11 +25,11 @@ export default {
     HelloVuex
   },
   methods: {
-    decrement (){
-      this.counter --;
+    subtraction (){
+      this.$store.commit('decrement')
     },
-    increment (){
-      this.counter ++;
+    addition (){
+      this.$store.commit('increment')
     }
   }
 }
