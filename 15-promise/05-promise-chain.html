@@ -46,7 +46,9 @@
         console.log(res, '第一层的10处理代码')
 
         // 2.
-        return Promise.resolve(res + '111')
+        // return Promise.resolve(res + '111')
+        return Promise.reject('error message');
+        throw 'error message';
     }).then( (res) => {
         // 1. 自己处理
         console.log(res, '第二层的10处理代码');
@@ -55,6 +57,8 @@
         return Promise.resolve(res + '222')
     }).then( res => {
         console.log(res, '第三层的10处理代码');
+    }).catch( err => {
+        console.log(err);
     })
 
 </script>
