@@ -12,15 +12,19 @@
     <button @click="addcount2(5)">+5 提交风格</button>
     <button @click="addStudent">添加学生</button>
     <button @click="updateInfo">修改info</button>
+    <button @click="aUpdateInfo">修改info actions</button>
+    <button @click="aUpdateInfo2">传递参数actions</button>
+    <button @click="aCallback">actions callback</button>
 
 
+    <p>{{$store.getters.moreAgestu(18)}}</p>
     <p>{{more20stus}}</p>
 
     <h6>----------APP getters---------</h6>
     <p>{{$store.getters.powerCount}}</p>
     <p>{{$store.getters.more20stu}}</p>
     <p>大于20的学生个数：{{$store.getters.more20stuLength}}</p>
-    <p>{{$store.getters.moreAgestu(18)}}</p>
+
 
     <p>{{$store.state.info}}</p>
 
@@ -78,6 +82,29 @@ export default {
     },
     updateInfo (){
       this.$store.commit('updateInfo')
+    },
+    aUpdateInfo (){
+      this.$store.dispatch('aUpdateInfo')
+    },
+    aUpdateInfo2 (){
+      this.$store.dispatch('aUpdateInfo2', {
+        name: "ca",
+        usx: "male"
+      })
+    },
+    aCallback (){
+      // this.$store.dispatch('aCallback', {
+      //   msg: "我是携带的信息",
+      //   success: () => {
+      //     console.log("我已经修改完成了")
+      //   }
+      // })
+
+      // this.$store.displatch('aCallback', "我是携带的信息")
+      this.$store.dispatch('aCallback', '我是携带的信息').then(resolve => {
+        console.log("完成了提交")
+        console.log(resolve)
+      })
     }
   }
 }

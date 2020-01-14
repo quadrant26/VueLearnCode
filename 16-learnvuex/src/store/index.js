@@ -49,7 +49,7 @@ const store = new Vuex.Store({
       state.students.push(stu);
     },
     updateInfo (state){
-      // state.info.name = "mercury"
+      state.info.name = "mercury"
 
       // 该方法做不到响应式
       // state.info['address'] = '洛杉矶';
@@ -65,11 +65,44 @@ const store = new Vuex.Store({
       // Vue.delete(state.info, 'age')
 
       // 方式二：
-      state.info = {...state.info, 'height': '123'};
+      // state.info = {...state.info, 'height': '123'};
 
+      // error 错误，不能在 mutations 进行异步操作
+      // setTimeout( () => {
+      //   state.info.name = "mercury"
+      // }, 1000)
+    },
+    updateInfo2 (state){
+      state.info.name = "mercury"
     }
   },
-  actions: {},
+  actions: {
+    aUpdateInfo (context){
+      setTimeout( () => {
+        // state.info.name = "mercury"
+        context.commit('updateInfo')
+      }, 1000)
+    },
+    aUpdateInfo2 (context, payload){
+      console.log(payload)
+    },
+    aCallback (context, payload){
+      // setTimeout( () => {
+      //   context.commit('updateInfo')
+      //   console.log(payload.msg)
+      //   payload.success();
+      // })
+
+      return new Promise((resolve, reject) => {
+        setTimeout( () => {
+          context.commit('updateInfo2');
+          console.log(payload)
+
+          resolve('1111')
+        }, 1000)
+      })
+    }
+  },
   getters: {
     powerCount(state) {
       return state.counter * state.counter;

@@ -1,5 +1,7 @@
 <template>
     <div>
+      <p>{{$store.getters.moreAgestu(18)}}</p>
+
       <h2>{{$store.state.counter}}</h2>
       <p>{{$store.getters.powerCount}}</p>
 
