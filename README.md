@@ -512,54 +512,229 @@
             
             - 回调函数 handle, 该回调函数的第一个参数就是 state
             
-        ```
+            ```
+                mutations: {
+                    // 方法
+                    increment(state){
+                    state.counter ++;
+                    },
+                    decrement (state){
+                    state.counter --;
+                    }
+                },
+            ```
+        - 参数传递
+                    
+            `this.$store.commit('incrementCount', number)`
+            
+            ```vue
+            mutations: {
+                incrementCount(state, number){
+                    state.counter += number;
+                },
+            }
+            ```
+        
+        - 第二种提交风格
+            
+            ```
+                // 提交
+                addcount2 (number){
+                // 2. 特殊的提交封装
+                this.$store.commit({
+                    type: 'incrementCount2',
+                    number
+                })
+                },
+                
+                // 使用
+                incrementCount2(state, payload){
+                // payload 负载
+                // 2. 特殊的提交封装
+                state.counter += payload.number;
+            
+                },
+            ```
+
+        - mutation 响应规则
+
+            store 中的 state 是响应式的，当state中的数据发生改变时，Vue组件会自动更新
+
+            规则:
+
+            提前在 store 中初始化好所需的属性
+
+            当给 state 中的对象添加新属性时，使用下面的方式
+
+                a. `Vue.set(obj, 'newProp', 123)`
+
+                b. 用新对象给就对象重新复制 `state.obj = { ...state.obj, newProp: 123 }`
+
+                    ```
+                    updateInfo (state){
+                    // state.info.name = "mercury"
+
+                    // 该方法做不到响应式
+                    // state.info['address'] = '洛杉矶';
+                    // 该方法做不到响应式
+                    // delete state.info.age;
+
+
+                    // 响应式操作
+                    // 方式一：
+                    // 响应式添加新的项
+                    // Vue.set(state.info, "address", "洛杉矶")
+                    // 删除
+                    // Vue.delete(state.info, 'age')
+
+                    // 方式二：
+                    state.info = {...state.info, 'height': '123'};
+
+                    }
+                    ```
+        
+        - 类型常量
+
+            ```
+            // store/mutations-type.js
+            export const INCREMENT = 'increment';
+            export const DECREMENT = 'decrement';
+
+            // store/index.js
+            // 导入
+            import {INCREMENT, DECREMENT} from './mutations-types'
+
             mutations: {
                 // 方法
-                increment(state){
-                  state.counter ++;
+                [INCREMENT](state){
+                state.counter ++;
                 },
-                decrement (state){
-                  state.counter --;
+                [DECREMENT] (state){
+                state.counter --;
+                },
+            }
+
+            // app.vue
+            methods: {
+                subtraction (){
+                this.$store.commit(DECREMENT)
+                },
+                addition (){
+                this.$store.commit(INCREMENT)
+                },
+            }
+            ```
+                    
+    
+    - ### Actions
+
+        异步操作
+
+        ```
+            // app.vue
+            aUpdateInfo (){
+                this.$store.dispatch('aUpdateInfo')
+            },
+            aUpdateInfo2 (){
+                this.$store.dispatch('aUpdateInfo2', {
+                    name: "ca",
+                    usx: "male"
+                })
+            }
+
+            // store/index.js
+            actions: {
+                aUpdateInfo (context){
+                setTimeout( () => {
+                    // state.info.name = "mercury"
+                    context.commit('updateInfo')
+                }, 1000)
+                },
+                aUpdateInfo2 (context, payload){
+                    console.log(payload)
                 }
             },
+
+
+            // 带回调的信息
+            // app.vue
+            aCallback (){
+                // this.$store.displatch('aCallback', "我是携带的信息")
+                this.$store.dispatch('aCallback', '我是携带的信息').then(resolve => {
+                    console.log("完成了提交")
+                    console.log(resolve)
+                })
+            }
+
+            // store/index.js
+            actions: {
+                aCallback (context, payload){
+                    return new Promise((resolve, reject) => {
+                        setTimeout( () => {
+                        context.commit('updateInfo2');
+                        console.log(payload)
+
+                        resolve('1111')
+                        }, 1000)
+                    })
+                }
+            }
         ```
-            - 参数传递
-                    
-        `this.$store.commit('incrementCount', number)`
-        
-        ```vue
-           mutations: {
-              incrementCount(state, number){
-                 state.counter += number;
-              },
-           }
-        ```
-        
-            - 第二种提交风格
-            
-        ```
-            // 提交
-            addcount2 (number){
-              // 2. 特殊的提交封装
-              this.$store.commit({
-                type: 'incrementCount2',
-                number
-              })
-            },
-            
-            // 使用
-            incrementCount2(state, payload){
-              // payload 负载
-              // 2. 特殊的提交封装
-              state.counter += payload.number;
-        
-            },
-        ```
-                    
     
-    - ### Action
-    
-    - ### Module
+    - ### Modules
+
+        ```
+            const moduleA = {
+                state: {
+                    name: "张三"
+                },
+                mutations: {
+                    updateName (state){
+                    state.name = "李四"
+                    },
+                    updateName2 (state, payload){
+                    state.name = payload
+                    }
+                },
+                actions: {
+
+                },
+                getters: {
+                    fullnameMuduleA(state){
+                        return state.name+'1111';
+                    },
+                    fullnameMuduleA2(state, getters){
+                        return getters.fullnameMuduleA+'1111';
+                    },
+                    // 第三个是 root 是根目录的 state
+                    fullnameMuduleA3(state, getters, root){
+                        return getters.fullnameMuduleA2+root.counter;
+                    }
+                }
+            }
+
+            modules: {
+                a: moduleA,
+                b: {
+                    state: {},
+                    mutations: {},
+                    actions: {},
+                    getters: {}
+                },
+            }
+        ```
+
+        a. 访问 modules 的数据
+        
+        `{{$store.state.moduleA.name}}`
+
+        b. 提交数据
+
+        `this.$store.commit('updateName2', "放肆")`
+
+        c. getters 访问
+
+        `<h4>{{$store.getters.fullnameMuduleA}}</h4>`
 
 7. axios 
                  
