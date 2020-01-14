@@ -13,7 +13,12 @@ const store = new Vuex.Store({
       {id: 111, name: 'kobe', age: 24},
       {id: 112, name: 'james', age: 30},
       {id: 113, name: 'lily', age: 10},
-    ]
+    ],
+    info: {
+      name: "mars",
+      age: 123,
+      height: 189
+    }
   },
   mutations: {
     // 方法
@@ -40,6 +45,26 @@ const store = new Vuex.Store({
     },
     addStudent(state, stu){
       state.students.push(stu);
+    },
+    updateInfo (state){
+      // state.info.name = "mercury"
+
+      // 该方法做不到响应式
+      // state.info['address'] = '洛杉矶';
+      // 该方法做不到响应式
+      // delete state.info.age;
+
+
+      // 响应式操作
+      // 方式一：
+      // 响应式添加新的项
+      // Vue.set(state.info, "address", "洛杉矶")
+      // 删除
+      // Vue.delete(state.info, 'age')
+
+      // 方式二：
+      state.info = {...state.info, 'height': '123'};
+
     }
   },
   actions: {},

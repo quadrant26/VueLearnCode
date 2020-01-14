@@ -11,6 +11,7 @@
     <button @click="addcount(5)">+5</button>
     <button @click="addcount2(5)">+5 提交风格</button>
     <button @click="addStudent">添加学生</button>
+    <button @click="updateInfo">修改info</button>
 
 
     <p>{{more20stus}}</p>
@@ -20,6 +21,8 @@
     <p>{{$store.getters.more20stu}}</p>
     <p>大于20的学生个数：{{$store.getters.more20stuLength}}</p>
     <p>{{$store.getters.moreAgestu(18)}}</p>
+
+    <p>{{$store.state.info}}</p>
 
     <h6>----------HelloVuex 内容---------</h6>
     <hello-vuex :counter="counter"></hello-vuex>
@@ -71,6 +74,9 @@ export default {
     addStudent (){
       const stu = {id: 114, name: 'amy', age: 35};
       this.$store.commit('addStudent', stu);
+    },
+    updateInfo (){
+      this.$store.commit('updateInfo')
     }
   }
 }
