@@ -4,6 +4,16 @@
     <h2>{{message}}</h2>
     <p>{{$store.state.counter}}</p>
 
+    <h6>----------APP muduleA 内容---------</h6>
+    <button @click="muduleAChange">修改</button>
+    <button @click="muduleAChange2">修改2</button>
+    <button @click="asyncUpdateName">修改3</button>
+    <h6>{{$store.state.a.name}}</h6>
+    <h4>{{$store.getters.fullnameMuduleA}}</h4>
+    <h4>{{$store.getters.fullnameMuduleA2}}</h4>
+    <h4>{{$store.getters.fullnameMuduleA3}}</h4>
+
+
     <button @click="subtraction">-</button>
     <button @click="addition">+</button>
 
@@ -105,6 +115,15 @@ export default {
         console.log("完成了提交")
         console.log(resolve)
       })
+    },
+    muduleAChange (){
+      this.$store.commit('updateName')
+    },
+    muduleAChange2 (){
+      this.$store.commit('updateName2', "放肆")
+    },
+    asyncUpdateName (){
+      this.$store.dispatch('aUpdateName')
     }
   }
 }

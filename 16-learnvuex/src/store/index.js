@@ -3,6 +3,38 @@ import Vuex from 'vuex'
 
 import {INCREMENT, DECREMENT} from './mutations-types'
 
+const moduleA = {
+  state: {
+    name: "张三"
+  },
+  mutations: {
+    updateName (state){
+      state.name = "李四"
+    },
+    updateName2 (state, payload){
+      state.name = payload
+    }
+  },
+  actions: {
+    aUpdateName(context){
+      setTimeout( () => {
+        context.commit('updateName2', "fangshiiiiiii")
+      }, 1000)
+    }
+  },
+  getters: {
+    fullnameMuduleA(state){
+      return state.name+'1111';
+    },
+    fullnameMuduleA2(state, getters){
+      return getters.fullnameMuduleA+'1111';
+    },
+    fullnameMuduleA3(state, getters, root){
+      return getters.fullnameMuduleA2+root.counter;
+    }
+  }
+}
+
 // 1. 装载插件
 Vue.use(Vuex)
 
@@ -124,7 +156,15 @@ const store = new Vuex.Store({
       return age => { return state.students.filter( s => s.age >= age )}
     }
   },
-  modules: {}
+  modules: {
+    a: moduleA,
+    b: {
+      state: {},
+      mutations: {},
+      actions: {},
+      getters: {}
+    },
+  }
 });
 
 
