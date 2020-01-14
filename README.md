@@ -737,4 +737,30 @@
         `<h4>{{$store.getters.fullnameMuduleA}}</h4>`
 
 7. axios 
+
+    - axios(config)
+
+    - axios.request(config)
+
+    - axios.get(url, [, config])
+
+    - axios.delete(url, [, config])
+
+    - axios.head(url, [, data[, config]])
+
+    - axios.post(url, [, data[, config]])
+
+    - axios.put(url, [, data[, config]])
+
+    - axios.patch(url, [, data[, config]])
+
+    // 并发请求
+    
+    - axios.all([axios(), axios()]).then(axios.spread(res1, res2))
+    
+    - 全局设置
+        
+        axios.defaults.baseURL
+        
+        axios.defaults.headers.post['Content-Type'] = "application/x-www-form-urlencoded"
                  
