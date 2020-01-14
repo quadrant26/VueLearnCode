@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import {INCREMENT, DECREMENT} from './mutations-types'
+
 // 1. 装载插件
 Vue.use(Vuex)
 
@@ -22,10 +24,10 @@ const store = new Vuex.Store({
   },
   mutations: {
     // 方法
-    increment(state){
+    [INCREMENT](state){
       state.counter ++;
     },
-    decrement (state){
+    [DECREMENT] (state){
       state.counter --;
     },
     incrementCount(state, number){
