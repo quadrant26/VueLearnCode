@@ -763,4 +763,25 @@
         axios.defaults.baseURL
         
         axios.defaults.headers.post['Content-Type'] = "application/x-www-form-urlencoded"
+        
+    - 拦截
+        
+        ```
+        instance.interceptors.request.use( config => {
+            console.log("来到了 request 拦截 success 中");
+            return config;
+        }, err => {
+            console.log("来到了 request 拦截 failure 中");
+            return err;
+        })
+        
+        instance.interceptors.response.use( res => {
+            console.log("来到了 request 拦截 success 中");
+            return res.data;
+        }, err => {
+            console.log("来到了 request 拦截 failure 中");
+            return err;
+        })
+        ```
+        
                  
